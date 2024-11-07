@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { fetchStarships } from '../../../services/starship-service/index';
+import { fetchAllStarships } from '../../../services/starship-service/index';
 import './style.css';
 import shipImage from '../../../../public/star-destroyer.png';
 import logo from '../../../../public/starwars-logo.jpg';
@@ -11,16 +11,15 @@ const StarshipList = ({ setSelectedStarship }) => {
     const [hasMore, setHasMore] = useState(true); // Check if there are more starships to load
 
     useEffect(() => {
-        const loadStarships = async () => {
-            const data = await fetchStarships(page);
-            if (data.results.length === 0) {
-                setHasMore(false); // If no more starships, disable "Daha Fazla" button
-            } else {
-                setStarships(prev => page === 1 ? data.results : [...prev, ...data.results]);
+        const loadAllStarships = async () => {
+            const data = await fetchAllStarships();
+            if (data) {
+                setStarships(data);
             }
         };
-        loadStarships();
-    }, [page]);
+        loadAllStarships();
+    }, []);
+    
 
     const handleLoadMore = () => setPage(prev => prev + 1);
 

@@ -2,12 +2,21 @@ import axios from 'axios';
 
 const baseURL= 'https://swapi.dev/api/';
 
-export const fetchStarships = async (page = 1) => {
+export const fetchAllStarships = async () => {
+    let allStarships = [];
+    let page = 1;
+    let hasMorePages = true;
+
     try {
-        const response = await axios.get(`${baseURL}starships/?page=${page}`);
-        return response.data;
+        while (hasMorePages) {
+            const response = await axios.get(`${baseURL}starships/?page=${page}`);
+            allStarships = [...allStarships, ...response.data.results];
+            page += 1;
+            hasMorePages = response.data.next !== null; // Devam eden sayfa varsa true olur
+        }
+        return allStarships;
     } catch (error) {
-        console.error("Error fetching starships:", error);
+        console.error("Error fetching all starships:", error);
         return null;
     }
 };
