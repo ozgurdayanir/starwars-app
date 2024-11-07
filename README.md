@@ -70,7 +70,6 @@ This project is a mini application that lists Star Wars starships, allows you to
 ### Searching
 ![Searching](./public/screenshots/search-ss.png)
 
-
 ## License
 
 This project is licensed under the MIT License. See the `LICENSE` file for more details.
