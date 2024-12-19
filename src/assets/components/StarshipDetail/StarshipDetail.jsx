@@ -8,12 +8,18 @@ const StarshipDetail = ({ starshipUrl, onBack }) => {
 
     useEffect(() => {
         const loadStarship = async () => {
-            const id = starshipUrl.match(/(\d+)/)[0];
-            const data = await fetchStarshipDetails(id);
-            setStarship(data);
+            try {
+                const id = starshipUrl.split('/').filter(Boolean).pop();
+                if (!id) throw new Error("Invalid starship URL or ID.");
+                const data = await fetchStarshipDetails(id);
+                setStarship(data);
+            } catch (error) {
+                console.error("Error loading starship:", error);
+            }
         };
         loadStarship();
     }, [starshipUrl]);
+    
 
     if (!starship) return <p>Loading...</p>;
 

@@ -4,7 +4,7 @@ import StarshipDetail from './assets/components/StarshipDetail';
 import './App.css';
 import soundTrack from '../public/starwars-soundtrack.mp3';
 
-const App = () => {
+const App = ( ) => {
     const [selectedStarship, setSelectedStarship] = useState(null);
     const [isAudioPlaying, setIsAudioPlaying] = useState(false);
     const audioRef = useRef(null);
@@ -32,6 +32,7 @@ const App = () => {
             }
         };
     }, []);
+    
 
     return (
         <div className='container'>
@@ -43,7 +44,7 @@ const App = () => {
                 {isAudioPlaying ? 'Pause Soundtrack' : 'Play Soundtrack'}
             </button>
             {selectedStarship ? (
-                <StarshipDetail starshipUrl={selectedStarship} onBack={handleBack} />
+                <StarshipDetail starshipUrl={selectedStarship}  onBack={handleBack} />
             ) : (
                 <StarshipList setSelectedStarship={setSelectedStarship} />
             )}

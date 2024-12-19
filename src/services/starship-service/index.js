@@ -22,6 +22,7 @@ export const fetchAllStarships = async () => {
 };
 
 export const fetchStarshipDetails = async (id) => {
+    console.log("Fetching starship details for ID:", id);
     try {
         const response = await axios.get(`${baseURL}starships/${id}/`);
         return response.data;

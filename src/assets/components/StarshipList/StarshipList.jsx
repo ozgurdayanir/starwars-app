@@ -19,7 +19,7 @@ const StarshipList = ({ setSelectedStarship }) => {
         };
         loadAllStarships();
     }, []);
-    
+
 
     const handleLoadMore = () => setPage(prev => prev + 1);
 
@@ -52,7 +52,10 @@ const StarshipList = ({ setSelectedStarship }) => {
                         <img src={shipImage} alt={ship.name} />
                         <p> <span>Model:</span> <br /> {ship.model}</p>
                         <p> <span>Hız: </span> <br />{ship.max_atmosphering_speed}</p>
-                        <button className='details-btn' onClick={() => setSelectedStarship(ship.url)}>Detaylar</button>
+                        <button className='details-btn' onClick={() => {
+                            console.log("Selected ship URL:", ship.url);
+                            setSelectedStarship(ship.url);
+                        }}>Detaylar</button>
                     </li>
                 ))}
             </ul>
